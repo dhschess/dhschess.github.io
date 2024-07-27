@@ -1,816 +1,432 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US" dir="ltr">
+
   <head>
-    <title>Viking Chess</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <link rel="stylesheet" type="text/css" href="aos/aos.css">
-    <link href="css/date-time-picker-component.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- script
-    ================================================== -->
-    <script src="js/modernizr.js"></script>
-  </head>
-  <body data-bs-spy="scroll" data-bs-target="#header-nav" tabindex="0">
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      <symbol xmlns="http://www.w3.org/2000/svg" id="facebook" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5Z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="youtube" viewBox="0 0 32 32" width="20" height="20">
-        <path fill="currentColor" d="M29.41 9.26a3.5 3.5 0 0 0-2.47-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.94.59a3.5 3.5 0 0 0-2.47 2.47A36.13 36.13 0 0 0 2 16a36.13 36.13 0 0 0 .59 6.74a3.5 3.5 0 0 0 2.47 2.47c2.18.59 10.94.59 10.94.59s8.76 0 10.94-.59a3.5 3.5 0 0 0 2.47-2.47A36.13 36.13 0 0 0 30 16a36.13 36.13 0 0 0-.59-6.74ZM13.2 20.2v-8.4l7.27 4.2Z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="instagram" viewBox="0 0 256 256" width="20" height="20">
-        <path fill="currentColor" d="M128 80a48 48 0 1 0 48 48a48.05 48.05 0 0 0-48-48Zm0 80a32 32 0 1 1 32-32a32 32 0 0 1-32 32Zm48-136H80a56.06 56.06 0 0 0-56 56v96a56.06 56.06 0 0 0 56 56h96a56.06 56.06 0 0 0 56-56V80a56.06 56.06 0 0 0-56-56Zm40 152a40 40 0 0 1-40 40H80a40 40 0 0 1-40-40V80a40 40 0 0 1 40-40h96a40 40 0 0 1 40 40ZM192 76a12 12 0 1 1-12-12a12 12 0 0 1 12 12Z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="discord" viewBox="0 0 512 512" width="20" height="20">
-        <path fill="currentColor" d="M217.9 32C118.6 35.7 46.4 112.6 38.4 209.9c1.2-.3 2.3-.7 3.5-1 21.4-7 42.8-13.4 64.1-20 2.6-.8 5.4.1 7 2.3 10.7 15.4 22.1 31.4 35.8 45 33.3-11 68.2-16.5 102.3-16.5s69 5.5 102.3 16.5c13.7-13.5 25.1-29.6 35.8-45 1.6-2.2 4.4-3.1 7-2.3 21.3 6.6 42.7 13 64.1 20 1.2.3 2.3.7 3.5 1-8.1-97.6-80.7-174.6-180.2-178.5-5.8-.3-11.5-.4-17.1-.4-5.8 0-11.5.1-17.1.4zm0 0c12.8 0 25.4 0 37.9.4-1.2-.3-2.3-.7-3.5-1-21.4-7-42.8-13.4-64.1-20-2.6-.8-5.4.1-7 2.3-10.7 15.4-22.1 31.4-35.8 45-33.3-11-68.2-16.5-102.3-16.5s-69 5.5-102.3 16.5c-13.7-13.5-25.1-29.6-35.8-45-1.6-2.2-4.4-3.1-7-2.3-21.3 6.6-42.7 13-64.1 20-1.2.3-2.3.7-3.5 1 8.1 97.6 80.7 174.6 180.2 178.5 5.8.3 11.5.4 17.1.4 5.8 0 11.5-.1 17.1-.4zM150.6 166.4c-18.1 0-32.8 15.2-32.8 33.8s14.7 33.8 32.8 33.8c18.1 0 32.8-15.2 32.8-33.8s-14.7-33.8-32.8-33.8zm215.7 0c-18.1 0-32.8 15.2-32.8 33.8s14.7 33.8 32.8 33.8c18.1 0 32.8-15.2 32.8-33.8s-14.7-33.8-32.8-33.8zm0 0c12.8 0 25.4 0 37.9.4-1.2-.3-2.3-.7-3.5-1-21.4-7-42.8-13.4-64.1-20-2.6-.8-5.4.1-7 2.3-10.7 15.4-22.1 31.4-35.8 45-33.3-11-68.2-16.5-102.3-16.5s-69 5.5-102.3 16.5c-13.7-13.5-25.1-29.6-35.8-45-1.6-2.2-4.4-3.1-7-2.3-21.3 6.6-42.7 13-64.1 20-1.2.3-2.3.7-3.5 1 8.1 97.6 80.7 174.6 180.2 178.5 5.8.3 11.5.4 17.1.4 5.8 0 11.5-.1 17.1-.4z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="linkedin" viewBox="0 0 512 512" width="20" height="20">
-        <path fill="currentColor" d="M444.17 32H70.28C49.85 32 32 46.7 32 66.89v374.72C32 461.91 49.85 480 70.28 480h373.78c20.54 0 35.94-18.21 35.94-38.39V66.89C480.12 46.7 464.6 32 444.17 32Zm-273.3 373.43h-64.18V205.88h64.18ZM141 175.54h-.46c-20.54 0-33.84-15.29-33.84-34.43c0-19.49 13.65-34.42 34.65-34.42s33.85 14.82 34.31 34.42c-.01 19.14-13.31 34.43-34.66 34.43Zm264.43 229.89h-64.18V296.32c0-26.14-9.34-44-32.56-44c-17.74 0-28.24 12-32.91 23.69c-1.75 4.2-2.22 9.92-2.22 15.76v113.66h-64.18V205.88h64.18v27.77c9.34-13.3 23.93-32.44 57.88-32.44c42.13 0 74 27.77 74 87.64Z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="navbar-icon" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="icon-arrow-left" viewBox="0 0 15 15">
-        <path fill="currentColor" fill-rule="evenodd" d="m2.707 8l3.147 3.146l-.708.707L.793 7.5l4.353-4.354l.708.708L2.707 7H14v1H2.707Z" clip-rule="evenodd" />
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="icon-arrow-right" viewBox="0 0 15 15">
-        <path fill="currentColor" fill-rule="evenodd" d="M9.854 3.146L14.207 7.5l-4.353 4.354l-.708-.708L12.293 8H1V7h11.293L9.146 3.854l.708-.708Z" clip-rule="evenodd" />
-      </symbol>
-    </svg>
-    <div id="bodywrap" class="overflow-hidden">
-      <header id="header" class="site-header position-absolute">
-        <nav id="header-nav" class="navbar navbar-expand-lg p-3 container-fluid position-fixed">
-          <div class="container-lg">
-            <a class="navbar-brand" href="index.html">
-              <img src="images/main-logo.png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
-                <use xlink:href="#navbar-icon"></use>
-              </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-lg-center justify-content-md-end align-items-center flex-grow-1  text-hover">
-                  <li class="nav-item me-5">
-                    <a class="nav-link light text-uppercase active p-0" href="#intro">Home</a>
-                  </li>
-                  <li class="nav-item me-5">
-                    <a class="nav-link light text-uppercase p-0" href="#about">About</a>
-                  </li>
-                  <li class="nav-item me-5">
-                    <a class="nav-link light text-uppercase p-0" href="#our-services">Sponsors</a>
-                  </li>
-                  <li class="nav-item me-5">
-                    <a class="nav-link light text-uppercase p-0" href="#latest-blog">Meetings</a>
-                  </li>
-                </li>
-                <li class="nav-item me-5">
-                  <a class="nav-link light text-uppercase p-0" href="#latest-blog">Officers</a>
-                </li>
-              </ul>
- 
-                <div class="social-links d-flex mt-5 mt-lg-0  align-items-center justify-content-end">
-                  <ul class=" navbar-nav  list-unstyled align-items-center justify-content-end">
-                    <li class="pe-4">
-                      <a href="#" class="light">
-                        <svg class="instagram" width="20" height="20">
-                          <use xlink:href="#instagram"></use>
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="pe-4">
-                      <a href="#" class="light">
-                        <svg class="discord" width="20" height="20">
-                          <use xlink:href="#discord"></use>
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="pe-4">
-                      <a href="#" class="light">
-                        <svg class="youtube" width="20" height="20">
-                          <use xlink:href="#youtube"></use>
-                        </svg>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <section id="intro">
-        <div class="image-holder position-relative">
-          <img src="images/banner-item1.jpg" alt="banner" class="banner-image">
-        </div>
-        <div class="container-lg">
-          <div class="banner-content position-absolute" data-aos="fade-up" >
-            <h1 class="banner-title light text-uppercase fw-bold">Vikings Chess Conquer the Board!</h1>
-            <a href="index.html#about" class="btn-slide btn-medium btn-light hover-slide-right text-uppercase mt-5">
-              <span>More Information</span>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="about" class="padding-large bg-gray-200">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="section-header">
-                <h2 class="text-uppercase mb-3 left-pattern">About Us</h2>
-                <h3 class="text-uppercase">Recognize more about our company</h3>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <p>
-                <strong class="pb-2 d-block">Enim leo leo non in viverra adipiscing nisi sed dictum nisi blandit.</strong> Gravida feugiat viverra porttitor semper in faucibus ut. Ipsum, vel aliquet purus urna placerat convallis felis. Pretium curabitur fames est.
-              </p>
-              <a href="about.html" class="btn-slide btn-medium btn-dark hover-slide-right text-uppercase mt-5">
-                <span>About Us</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="projects" class="padding-large">
-        <div class="container-fluid">
-          <div class="section-header offset-lg-4">
-            <h2 class="text-uppercase mb-3 left-pattern">Our Projects</h2>
-            <h3 class="text-uppercase">Explore our works</h3>
-          </div>
-          <div class="projects-isotope">
-            <div class="projects-flters d-flex flex-wrap justify-content-center my-5" >
-              <button class="filter-button active border-0 bg-transparent me-5 mb-3" data-filter="*">All</button>
-              <button class="filter-button border-0 bg-transparent me-5 mb-3" data-filter=".building">Buildings</button>
-              <button class="filter-button border-0 bg-transparent me-5 mb-3" data-filter=".interior">Interior & Exterior</button>
-              <button class="filter-button border-0 bg-transparent me-5 mb-3" data-filter=".renovate">Renovate</button>
-              <button class="filter-button border-0 bg-transparent me-5 mb-3" data-filter=".industry">Industry</button>
-              <button class="filter-button border-0 bg-transparent me-5 mb-3" data-filter=".road">Road</button>
-            </div>
-            <div class="row isotope-container">
-              <div class="col-lg-4 col-md-6 item building">
-                <div class="projects-content mx-auto">
-                  <a href="project-single.html"> <img src="images/projects-item1.jpg" class="reveal-curve-top" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Outbox creatives building</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item renovate">
-                <div class="projects-content mx-auto">
-                  <a href="project-single.html"> <img src="images/projects-item2.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Slova private residence</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item industry">
-                <div class="projects-content mx-auto">
-                  <a href="project-single.html"> <img src="images/projects-item3.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item industry">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item4.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item road">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item5.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item building">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item6.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item road">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item7.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item interior">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item9.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-              <div class="col-lg-4 col-md-6 item interior">
-                <div class="projects-content">
-                  <a href="project-single.html"> <img src="images/projects-item10.jpg" class="img-fluid" alt="building"> </a>
-                </div>
-                <h3 class="fs-3 text-uppercase text-center mt-3 mb-5">
-                  <a href="project-single.html">Jaguare garment industry</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="our-services" class="jarallax d-flex align-items-center" style="background-image: url(images/bg-image1.jpg); width: 100%; height: 535px; background-repeat: no-repeat;">
-        <div class="container mt-5" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="service-item">
-                <h3 class="light fs-1">Building New Homes</h3>
-                <p class="light">Vehicula at eget a arcu neque ultricies.</p>
-                <a href="services-single.html" class="btn-slide btn-medium btn-dark hover-slide-right text-uppercase my-5">
-                  <span>Read More</span>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="service-item">
-                <h3 class="light fs-1">Designing Spaces</h3>
-                <p class="light">Ultricies liquet tempus vel amet.</p>
-                <a href="services-single.html" class="btn-slide btn-medium btn-dark hover-slide-right text-uppercase my-5">
-                  <span>Read More</span>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="service-item">
-                <h3 class="light fs-1">Road Maintenance</h3>
-                <p class="light">Tempus vel amet eget egestas arcu non.</p>
-                <a href="services-single.html" class="btn-slide btn-medium btn-dark hover-slide-right text-uppercase my-5">
-                  <span>Read More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="brand-collection" class="padding-large overflow-hidden">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row justify-content-between">
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item1.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item2.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item3.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item4.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item5.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item6.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item7.png" alt="brand">
-              </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-              <div class="brand-item bg-gray-200">
-                <img src="images/brand-item8.png" alt="brand">
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="our-team" class="padding-large pt-0">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="swiper-header d-flex flex-wrap justify-content-between mb-3">
-              <div class="section-header mb-5 text-uppercase">
-                <h2 class="mb-3 left-pattern">Meet Our Team</h2>
-                <h3>Our professional team</h3>
-              </div>
-              <div class="swiper-arrow-wrap d-flex">
-                <div class="swiper-arrow border rounded-circle d-flex align-items-center justify-content-center me-3">
-                  <svg class="icon-arrow-left" width="40" height="20">
-                    <use xlink:href="#icon-arrow-left" />
-                  </svg>
-                </div>
-                <div class="swiper-arrow border rounded-circle d-flex align-items-center justify-content-center">
-                  <svg class="icon-arrow-right" width="40" height="20">
-                    <use xlink:href="#icon-arrow-right" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="swiper team-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="team-member position-relative">
-                    <div class="image-holder zoom-effect mx-auto">
-                      <img src="images/team-item1.jpg" alt="team member" class="img-fluid">
-                      <ul class="social-links list-unstyled position-absolute">
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="facebook text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#facebook"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="twitter text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#twitter"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="instagram text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#instagram"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="youtube text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#youtube"></use>
-                            </svg>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="member-info pt-4 text-center">
-                      <h3 class="fs-4 text-uppercase">Alex Smith</h3>
-                      <span class="fs-6">Co-founder</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="team-member position-relative">
-                    <div class="image-holder zoom-effect">
-                      <img src="images/team-item2.jpg" alt="team member" class="img-fluid">
-                      <ul class="social-links list-unstyled position-absolute">
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="facebook text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#facebook"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="twitter text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#twitter"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="instagram text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#instagram"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="youtube text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#youtube"></use>
-                            </svg>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="member-info pt-4 text-center">
-                      <h3 class="fs-4 text-uppercase">Luma Miller</h3>
-                      <span class="fs-6">Manager</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="team-member position-relative">
-                    <div class="image-holder zoom-effect">
-                      <img src="images/team-item3.jpg" alt="team member" class="img-fluid">
-                      <ul class="social-links list-unstyled position-absolute">
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="facebook text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#facebook"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="twitter text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#twitter"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="instagram text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#instagram"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="youtube text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#youtube"></use>
-                            </svg>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="member-info pt-4 text-center">
-                      <h3 class="fs-4 text-uppercase">Michael Strokes</h3>
-                      <span class="fs-6">Manager</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="team-member">
-                    <div class="image-holder">
-                      <img src="images/team-item1.jpg" alt="team member" class="img-fluid">
-                      <ul class="social-links list-unstyled position-absolute">
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="facebook text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#facebook"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="twitter text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#twitter"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="instagram text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#instagram"></use>
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-dark">
-                            <svg class="youtube text-primary-500" width="25" height="20" aria-hidden="true">
-                              <use xlink:href="#youtube"></use>
-                            </svg>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="member-info pt-4 text-center">
-                      <h3 class="fs-4 text-uppercase">William Brown</h3>
-                      <span class="fs-6">Staff</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="testimonials" class="padding-large jarallax" style="background-image: url(images/bg-image2.jpg); width: 100%; height: 808px; background-repeat: no-repeat; background-position: center;">
-        <div class="container mt-5" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="section-header mb-5 text-uppercase">
-              <h2 class="light left-pattern">Testimonials</h2>
-              <h3 class="light">What our clients says</h3>
-            </div>
-            <div class="swiper review-swiper light">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="review-item bg-light p-5">
-                    <blockquote class="fs-5">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis placerat proin tortor mattis.” </blockquote>
-                    <div class="author-detail left-pattern">
-                      <div class="name fw-bold">Kelly Garcia</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="review-item bg-light p-5">
-                    <blockquote class="fs-5">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis placerat proin tortor mattis.” </blockquote>
-                    <div class="author-detail left-pattern">
-                      <div class="name fw-bold">Jonas Müller</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="review-item bg-light p-5">
-                    <blockquote class="fs-5">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis placerat proin tortor mattis.” </blockquote>
-                    <div class="author-detail left-pattern">
-                      <div class="name fw-bold">Lucia Bianchi</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="review-item bg-light p-5">
-                    <blockquote class="fs-5">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis placerat proin tortor mattis.” </blockquote>
-                    <div class="author-detail left-pattern">
-                      <div class="name fw-bold">Dmitri Abramov</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="our-achievement" class="padding-large bg-gray-200">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="counter-info text-center d-flex align-items-end">
-                <div class="counter-number d-flex align-items-center">
-                  <h4 class="timer fw-bold m-0" data-to="100" data-speed="1000">780</h4>
-                </div>
-                <p class="counter-description text-uppercase ps-2 fw-bold">Projects done</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="counter-info text-center d-flex align-items-end">
-                <div class="counter-number d-flex align-items-center">
-                  <h4 class="timer fw-bold m-0" data-to="100" data-speed="1000">127</h4>
-                </div>
-                <p class="counter-description text-uppercase ps-2 fw-bold">Total members</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="counter-info text-center d-flex align-items-end">
-                <div class="counter-number d-flex align-items-center">
-                  <h4 class="timer fw-bold m-0" data-to="100" data-speed="1000">627</h4>
-                </div>
-                <p class="counter-description text-uppercase ps-2 fw-bold">Happy customers</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="counter-info text-center d-flex align-items-end">
-                <div class="counter-number d-flex align-items-center">
-                  <h4 class="timer fw-bold m-0" data-to="10" data-speed="1000">28</h4>
-                </div>
-                <p class="counter-description text-uppercase ps-2 fw-bold">Awards</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="latest-blog" class="padding-large">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row">
-            <div class="section-header text-uppercase">
-              <h2 class="left-pattern">News Articles</h2>
-              <h3>Read Latest Articles</h3>
-            </div>
-            <div class="post-grid d-flex flex-wrap justify-content-center mt-5">
-              <div class="col-lg-4 col-md-6 mb-3">
-                <div class="card-item position-relative">
-                  <div class="card border-0">
-                    <div class="card-image">
-                      <img src="images/post-item1.jpg" alt="" class="img-fluid">
-                    </div>
-                  </div>
-                  <div class="card-body p-3 position-absolute">
-                    <div class="meta-title">
-                      <em class="light">Feb 1, 2023 / Buildings</em>
-                    </div>
-                    <h3 class="card-title fs-3 text-uppercase mt-3 light">
-                      <a href="blog-single.html">Top 10 mindblowing architecture buildings in the world</a>
-                    </h3>
-                    <p class="light">It’s normal to feel anxiety, worry and grief any time you’re diagnosed with a condition that’s certainly true... <a href="blog-single.html" class="text-decoration-underline">
-                        <em>Read more</em>
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-3">
-                <div class="card-item position-relative">
-                  <div class="card border-0">
-                    <div class="card-image">
-                      <img src="images/post-item2.jpg" alt="" class="img-fluid">
-                    </div>
-                  </div>
-                  <div class="card-body p-3 position-absolute">
-                    <div class="meta-title">
-                      <em class="light">Feb 12, 2023 / Construction</em>
-                    </div>
-                    <h3 class="card-title fs-3 text-uppercase mt-3 light">
-                      <a href="blog-single.html">Amazing technologies that helped to create creatives works</a>
-                    </h3>
-                    <p class="light">It’s normal to feel anxiety, worry and grief any time you’re diagnosed with a condition that’s certainly true... <a href="blog-single.html" class="text-decoration-underline">
-                        <em>Read more</em>
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6">
-                <div class="card-item position-relative">
-                  <div class="card border-0">
-                    <div class="card-image">
-                      <img src="images/post-item3.jpg" alt="" class="img-fluid">
-                    </div>
-                  </div>
-                  <div class="card-body p-3 position-absolute">
-                    <div class="meta-title">
-                      <em class="light">Feb 30, 2023 / Company</em>
-                    </div>
-                    <h3 class="card-title fs-3 text-uppercase mt-3 light">
-                      <a href="blog-single.html">100 best construction company around the world</a>
-                    </h3>
-                    <p class="light">It’s normal to feel anxiety, worry and grief any time you’re diagnosed with a condition that’s certainly true... <a href="blog-single.html" class="text-decoration-underline">
-                        <em>Read more</em>
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="btn-center">
-            <a href="blog.html" class="btn-slide btn-medium btn-dark hover-slide-right text-uppercase mt-5">
-              <span>All articles</span>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="contact" class="jarallax d-flex align-items-center padding-large" style="background-image: url(images/bg-image3.jpg); width: 100%; height: 567px; background-repeat: no-repeat; background-position: center;">
-        <div class="container" data-aos="fade-up" data-aos-duration="2000">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <h3 class="light text-uppercase">Are you ready to start new project ?</h3>
-              <p class="light mt-4">If you have any projects in mind say hello at <strong>
-                  <a href="mailto:">contact@yourinfo.com</a>
-                </strong> or just call us at <strong>
-                  <a href="">+111 1234 2344 1232.</a>
-                </strong>
-              </p>
-              <a href="contact.html" class="btn-slide btn-medium btn-light hover-slide-right text-uppercase mt-5">
-                <span>Get in touch</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <footer id="footer" class="overflow-hidden padding-large">
-        <div class="container">
-          <div class="row d-flex flex-wrap justify-content-between">
-            <div class="col-lg-3 col-md-6 col-sm-6 pb-3">
-              <div class="footer-menu">
-                <img src="images/main-logo-dark.png" alt="footer logo" class="pb-4">
-                <p>Vehicula at eget a arcu neque, ultricies liquet tempus.</p>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6 pb-3">
-              <div class="footer-menu">
-                <ul class="menu-list list-unstyled">
-                  <li class="pb-2">
-                    <a href="#about">About</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Terms & Conditions</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Privacy Policy</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Career</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Contact</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Help</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 pb-3">
-              <div class="footer-menu">
-                <ul class="menu-list list-unstyled">
-                  <li class="pb-2">
-                    <a href="#about">Quick Links</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Newsletter</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Articles</a>
-                  </li>
-                  <li class="pb-2">
-                    <a href="#">Location</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 pb-3">
-              <div class="footer-menu">
-                <ul class="menu-list list-unstyled">
-                  <li class="pb-2">163 Elm Drive, New York City United States </li>
-                  <li class="pb-2">(+089) 234-516-6123 </li>
-                  <li class="pb-2">
-                    <a href="mailto:">info@yourinfo.com</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <div class="footer-bottom d-flex flex-wrap justify-content-between border-top pt-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <p>©2023 Boldiz | HTML template by: <strong>
-                <a href="https://templatesjungle.com/">TemplatesJungle.</a>
-              </strong>
-            </p>
-          </div>
-          <div class="col-lg-6">
-            <ul class="social-links list-unstyled d-flex justify-content-lg-end">
-              <li class="pe-3">
-                <a href="#">
-                  <svg class="facebook text-primary-500" width="25" height="20" aria-hidden="true">
-                    <use xlink:href="#facebook"></use>
-                  </svg>
-                </a>
-              </li>
-              <li class="pe-3">
-                <a href="#">
-                  <svg class="twitter text-primary-500" width="25" height="20" aria-hidden="true">
-                    <use xlink:href="#twitter"></use>
-                  </svg>
-                </a>
-              </li>
-              <li class="pe-3">
-                <a href="#">
-                  <svg class="instagram text-primary-500" width="25" height="20" aria-hidden="true">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <svg class="youtube text-primary-500" width="25" height="20" aria-hidden="true">
-                    <use xlink:href="#youtube"></use>
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="aos/aos.js"></script>
-    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Dulles Vikings Chess</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+   
+    <link href="assets/css/theme.css" rel="stylesheet" />
+    
+
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand " href="index.html"><img src="assets/img/gallery/logo.png" height="70" width="290" alt="..." /></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#aboutUs">About us</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#clients">Reviews</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#faq">Faq</a></li>
+              
+            </ul>
+            <form class="ps-lg-5"><a class="btn btn-primary order-1 order-lg-0" href="https://discord.gg/9qUbSQKGEP" target="_blank">JOIN</a></form>
+          </div>
+        </div>
+      </nav>
+      <section id="home">
+        <div class="bg-holder" style="background-image:url(assets/img/gallery/header-bg.png);background-position:center;background-size:cover;top:-250px">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row align-items-center min-vh-50 min-vh-sm-100">
+            <div class="col-md-7 col-lg-6 text-md-start text-center">
+              <h1 class="text-light fs-6 fs-xl-6 font-cursive fw-normal mb-5 ">Free Online Tutoring<br />Learn Math, Science, Coding, and Finance <br />Aim, Learn, Succeed with us!</h1><a class="btn btn-primary" href="#aboutUs" role="button">GET STARTED
+                <svg class="bi bi-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section id="aboutUs">
+        
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6 text-center mb-6 mb-md-0 order-0 order-md-1"><img class="w-100" src="assets/img/gallery/about-us.png" alt="..." /></div>
+            <div class="col-md-6 text-center text-md-start mb-6">
+              <h4 class="text-gold">ABOUT US</h4>
+              <p class="my-5 fs-1 pe-xl-8">We are a free online tutoring service dedicated to helping students succeed. At SinghTutors, we truly believe that every student can reach their full potential with the right guidance and support!  </p>
+              <div class="card card-span bg-soft-primary border-start border-primary border-5 mt-3">
+                <div class="card-body">
+                  <h4 class="lh-base px-lg-5 py-3">
+                    Join us as a Tutor or Student!
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section>
+
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6 text-center mb-6 mb-md-0"><img class="w-100" src="assets/img/gallery/how-to-apply.png" alt="..." /></div>
+            <div class="col-md-6 text-center text-md-start mb-6 px-4">
+              <h4 class="text-gold text-uppercase">Become a Tutor!</h4>
+              <p class="my-5 fs-1 pe-xl-7">By tutoring, you can earn valuable volunteer hours while making a positive impact in the community. You'll gain experience and enjoy networking opportunities, all within a flexible schedule that suits your needs. Click on the JOIN button in the top right to get started! </p>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+      <section class="bg-primary-gradient" id="faq">
+        <div class="bg-holder" style="background-image:url(assets/img/gallery/faq-bg.png);background-position:right;background-size:contain;">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-md-6">
+              <h4 class="text-gold text-uppercase">faq</h4>
+              <h1 class="font-cursive fw-normal mb-5">Frequently Asked Questions </h1>
+            </div>
+            <div class="col-md-6"><img class="w-100" src="assets/img/gallery/faq.png" alt="..." /></div>
+          </div>
+          <div class="row flex-center py-4">
+            <div class="col-md-6">
+              <div class="accordion" id="accordionExample1">
+                <div class="accordion-item mb-2 rounded overflow-hidden">
+                  <h2 class="accordion-header" id="heading1">
+                    <button class="accordion-button px-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1"><span class="mb-0 text-start fs-0 text-900 fw-medium">What subjects do you teach?</span></button>
+                  </h2>
+                  <div class="accordion-collapse collapse show" id="collapse1" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-primary-gradient px-4">We teach Math, Science, Coding, and Finance.</div>
+                  </div>
+                </div>
+                <div class="accordion-item mb-2 rounded overflow-hidden">
+                  <h2 class="accordion-header" id="heading2">
+                    <button class="accordion-button px-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2"><span class="mb-0 text-start fs-0 text-900 fw-medium">What grade levels do you teach?</span></button>
+                  </h2>
+                  <div class="accordion-collapse collapse" id="collapse2" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-primary-gradient px-4">Students from grades 1-9 are welcome!</div>
+                  </div>
+                </div>
+                <div class="accordion-item mb-2 rounded overflow-hidden">
+                  <h2 class="accordion-header" id="heading3">
+                    <button class="accordion-button px-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="true" aria-controls="collapse3"><span class="mb-0 text-start fs-0 text-900 fw-medium">Why did you create SinghTutors?</span></button>
+                  </h2>
+                  <div class="accordion-collapse collapse" id="collapse3" aria-labelledby="heading3" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-primary-gradient px-4">I want to provide an excellent education to kids that are not able to pay for expensive tutoring services.</div>
+                  </div>
+                </div>
+                <div class="accordion-item mb-2 rounded overflow-hidden">
+                  <h2 class="accordion-header" id="heading4">
+                    <button class="accordion-button px-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4"><span class="mb-0 text-start fs-0 text-900 fw-medium">What are the benefits of Tutoring at SinghTutors?</span></button>
+                  </h2>
+                  <div class="accordion-collapse collapse" id="collapse4" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-primary-gradient px-4">By tutoring, you can earn valuable volunteer hours while making a positive impact in the community. You'll gain experience and enjoy networking opportunities, all within a flexible schedule that suits your needs</div>
+                  </div>
+                </div>
+                <div class="accordion-item mb-2 rounded overflow-hidden">
+                  <h2 class="accordion-header" id="heading5">
+                    <button class="accordion-button px-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5"><span class="mb-0 text-start fs-0 text-900 fw-medium">How do I join?</span></button>
+                  </h2>
+                  <div class="accordion-collapse collapse" id="collapse5" aria-labelledby="heading5" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-primary-gradient px-4">Click on the JOIN button in the top right!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="accordion" id="accordionExample2">
+       
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section id="clients">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-11 col-lg-6 col-xl-4 col-xxl-3">
+              <h4 class="text-gold text-uppercase">Reviews</h4>
+              <h1 class="font-cursive fw-normal mb-5">Our Previous Students </h1>
+            </div>
+            <div class="col-xxl-10">
+              <div class="position-relative offset-9 offset-sm-10 offset-lg-11 mb-3"><a class="carousel-control-prev carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
+              <div class="carousel slide" id="carouselExampleDark" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3">I really enjoyed my experience at SinghTutors. The tutors were very nice and they helped me learn Algebra!</p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0">Rahul Sharma</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3">Singhtutors has been very helpful throughout my middle school. Struggling in geometry, I found out online website, and this changed my grades. It set up a strong foundation for high school math courses such as precalculus. Tutors at Singhtutors are driven by their passion for math and provide their excellence and expertise.</p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0">Prerak Modi</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3">Singhtutors helped me learn how to code and sparked my interest in the Computer Science field</p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0">Naomi Chibudem</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item" data-bs-interval="2000">
+                    <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3">Singhtutors helped me study for a chemistry test and I got a A+ on it!</p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0">Aryan Singh</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3"></p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3"></p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3"></p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3"></p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="card card-span h-100 shadow-primary">
+                          <div class="card-body my-3">
+                            <p class="mb-0 px-3 px-md-2 px-xxl-3"></p>
+                            <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/person.png" width="50" alt="" />
+                              <div class="flex-1 align-items-center pt-2">
+                                <h6 class="mb-0"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+   
+       <!-- ============================================-->
+      <!-- <section> begin ============================-->
+
+      <section>
+        <div class="bg-holder" style="background-image:url(assets/img/gallery/header-bg.png);background-position:center;background-size:contain;">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row min-vh-lg-50 min-vh-xl-75">
+            <div class="col-lg-6 col-xl-5 my-2 py-9 d-none d-lg-block">
+              <div class="card card-span bg-transparent border-start border-primary border-5 mt-3">
+                <div class="card-body">
+                  <p class="text-light fs-2 lh-lg px-lg-3">We provide excellent no cost Tutoring Services, so join us Today!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-5 mb-3">
+              <div class="card card-span shadow py-4 px-5">
+                <div class="card-body">
+                  <form class="row g-3 align-items-center">
+                    <div class="mb-3">
+                      <label class="form-label" for="formGroupExampleInput">Name</label>
+                      <input class="form-control form-traffico-control" id="formGroupExampleInput" type="text" placeholder="Name" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="formGroupExampleInput2">Grade Level</label>
+                      <input class="form-control form-traffico-control" id="formGroupExampleInput2" type="text" placeholder="Grade Level" />
+                    </div>
+                    <div class="col-12">
+                      <form class="ps-lg-5"><a class="btn btn-primary order-1 order-lg-0" href="https://discord.gg/9qUbSQKGEP" >JOIN</a></form>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="py-5">
+
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-md-6 col-xl-8 order-0">
+              <p class="text-center text-md-start">All rights Reserved &copy; SinghTutors, 2024</p>
+            </div>
+            <div class="col-md-6 col-xl-3 order-1">
+              <p class="text-center text-md-end text-xl-start">Made
+                
+                
+                </svg>by&nbsp;<a class="text-1000 fw-bold" href="https://themewagon.com/" target="_blank">Suraj Mahendar Singh</a>
+              </p>
+              <ul class="list-unstyled list-inline mb-6 mb-md-0 text-center text-md-end text-xl-start">
+                <li class="list-inline-item mr-2"><a class="text-decoration-none" href="https://www.instagram.com/singhtutors" target="_blank"> <img class="list-social-icon" src="assets/img/icons/instagram.png" alt="..." /></a></li>
+                <li class="list-inline-item mr-2"><a class="text-decoration-none" href="https://github.com/singhtutors/singhtutors.github.io" target="_blank"><img class="list-social-icon" src="assets/img/icons/github.png" alt="..." /></a></li>
+                <li class="list-inline-item mr-2"><a class="text-decoration-none" href="https://www.linkedin.com/in/suraj-mahendar-9887392b3/" target="_blank"><img class="list-social-icon" src="assets/img/icons/linkedin.png" alt="..." /></a></li>
+                <li class="list-inline-item mr-2"><a class="text-decoration-none" href="https://discord.gg/9qUbSQKGEP" target="_blank"><img class="list-social-icon" src="assets/img/icons/discord.png" alt="..." /></a></li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   </body>
+
 </html>
